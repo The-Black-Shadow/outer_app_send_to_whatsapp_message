@@ -221,4 +221,9 @@ SENDER_NUMBER=your_whatsapp_sender_number_here
 👨‍💻 **Prothes Barai**\
 Software Engineer • Bangladesh
 
+## ✨ Forked & Updated By
+
+👨‍💻 **[Md. Mehedi Hasan](https://github.com/The-Black-Shadow)**\
+Added `.env` credential management and WhatsApp template constraint fixes.
+
 ------------------------------------------------------------------------
