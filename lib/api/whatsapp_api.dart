@@ -4,14 +4,24 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class WhatsappApi {
-  static final String accessPermanentToken = dotenv.env['ACCESS_PERMANENT_TOKEN'] ?? "";
-  static final String fromPhoneNumberId = dotenv.env['FROM_PHONE_NUMBER_ID'] ?? "";
+  static final String accessPermanentToken =
+      dotenv.env['ACCESS_PERMANENT_TOKEN'] ?? "";
+  static final String fromPhoneNumberId =
+      dotenv.env['FROM_PHONE_NUMBER_ID'] ?? "";
 
   static Future<Map<String, dynamic>?> sendText(
+    // String receiverPhnNo,
+    // String name,
+    // String orderDetails,
+    // String address,
     String receiverPhnNo,
-    String name,
-    String orderDetails,
-    String address,
+    String customerName,
+    String orderId,
+    String orderItems,
+    String grandTotal,
+    String deliveryAddress,
+    String paymentMethod,
+    String orderStatus,
   ) async {
     final url = Uri.parse(
       "https://graph.facebook.com/v25.0/$fromPhoneNumberId/messages",
@@ -19,12 +29,7 @@ class WhatsappApi {
 
     // Helper to format strings to meet WhatsApp template parameter constraints
     // WhatsApp template variables cannot contain newlines, tabs, or consecutive spaces
-    String cleanParam(String text) {
-      return text
-          .replaceAll(RegExp(r'[\n\t\r]'), ' ')
-          .replaceAll(RegExp(r'\s{2,}'), ' ')
-          .trim();
-    }
+    String cleanParam(String text) => text.trim();
 
     // >>> Send Order Template Message =======================
     // Using the pre-approved template that works for business-initiated conversations.
@@ -33,15 +38,19 @@ class WhatsappApi {
       "to": receiverPhnNo,
       "type": "template",
       "template": {
-        "name": "jaspers_market_order_confirmation_v1",
+        "name": "order_confirmation_v1",
         "language": {"code": "en_US"},
         "components": [
           {
             "type": "body",
             "parameters": [
-              {"type": "text", "text": cleanParam(name)},
-              {"type": "text", "text": cleanParam(orderDetails)},
-              {"type": "text", "text": cleanParam(address)},
+              {"type": "text", "text": cleanParam(customerName)},
+              {"type": "text", "text": cleanParam(orderId)},
+              {"type": "text", "text": cleanParam(orderItems)},
+              {"type": "text", "text": cleanParam(grandTotal)},
+              {"type": "text", "text": cleanParam(deliveryAddress)},
+              {"type": "text", "text": cleanParam(paymentMethod)},
+              {"type": "text", "text": cleanParam(orderStatus)},
             ],
           },
         ],
