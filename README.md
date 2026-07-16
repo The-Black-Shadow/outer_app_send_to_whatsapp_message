@@ -224,6 +224,5 @@ Software Engineer • Bangladesh
 ## ✨ Forked & Updated By
 
 👨‍💻 **[Md. Mehedi Hasan](https://github.com/The-Black-Shadow)**\
-Added `.env` credential management and WhatsApp template constraint fixes.
 
 ------------------------------------------------------------------------
