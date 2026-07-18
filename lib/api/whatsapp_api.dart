@@ -29,7 +29,11 @@ class WhatsappApi {
 
     // Helper to format strings to meet WhatsApp template parameter constraints
     // WhatsApp template variables cannot contain newlines, tabs, or consecutive spaces
-    String cleanParam(String text) => text.trim();
+    // Also, WhatsApp does not allow empty strings for parameters.
+    String cleanParam(String text) {
+      String cleaned = text.replaceAll(RegExp(r'\s+'), ' ').trim();
+      return cleaned.isEmpty ? "-" : cleaned;
+    }
 
     // >>> Send Order Template Message =======================
     // Using the pre-approved template that works for business-initiated conversations.
@@ -44,13 +48,41 @@ class WhatsappApi {
           {
             "type": "body",
             "parameters": [
-              {"type": "text", "text": cleanParam(customerName)},
-              {"type": "text", "text": cleanParam(orderId)},
-              {"type": "text", "text": cleanParam(orderItems)},
-              {"type": "text", "text": cleanParam(grandTotal)},
-              {"type": "text", "text": cleanParam(deliveryAddress)},
-              {"type": "text", "text": cleanParam(paymentMethod)},
-              {"type": "text", "text": cleanParam(orderStatus)},
+              {
+                "type": "text",
+                "parameter_name": "customer_name",
+                "text": cleanParam(customerName),
+              },
+              {
+                "type": "text",
+                "parameter_name": "order_id",
+                "text": cleanParam(orderId),
+              },
+              {
+                "type": "text",
+                "parameter_name": "order_items",
+                "text": cleanParam(orderItems),
+              },
+              {
+                "type": "text",
+                "parameter_name": "grand_total",
+                "text": cleanParam(grandTotal),
+              },
+              {
+                "type": "text",
+                "parameter_name": "delivery_address",
+                "text": cleanParam(deliveryAddress),
+              },
+              {
+                "type": "text",
+                "parameter_name": "payment_method",
+                "text": cleanParam(paymentMethod),
+              },
+              {
+                "type": "text",
+                "parameter_name": "order_status",
+                "text": cleanParam(orderStatus),
+              },
             ],
           },
         ],

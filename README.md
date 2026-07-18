@@ -221,9 +221,4 @@ SENDER_NUMBER=your_whatsapp_sender_number_here
 👨‍💻 **[Prothes Barai](https://github.com/prothesbarai/)**\
 Software Engineer • Bangladesh
 
-## ✨ Forked & Updated By
-
-👨‍💻 **[Md. Mehedi Hasan](https://github.com/The-Black-Shadow)**\
-Mobile App Developer • Bangladesh
-
 ------------------------------------------------------------------------
